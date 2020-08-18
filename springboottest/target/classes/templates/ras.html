@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+ <form method="post" action="/key" onsubmit="return fun()" name = "user">
+        用户名: <input type="text" name="uName" class="text">  <br>
+        密码: <input type="text" name="pwd" class="text">  <br>
+        <input type="submit" class="button">
+    </form>
+
+</body>
+<script src="../jquery-1.12.4.min.js" th:src="@{/jquery-1.12.4.min.js}"></script>
+ 
+<!-- 引入非对称RSA加密工具 -->
+<script src="../jsencrypt.min.js" th:src="@{/jsencrypt.min.js}"></script>
+<script type="text/javascript">
+function fun(){
+    //获取 name为'user'的from元素下面的 name为'pwd'的元素的值
+    //就是获取 form 表单中的 密码
+    var password = user.pwd.value;  
+	
+    //创建 JSEncrypt 对象
+    var encrypt = new JSEncrypt();
+    
+    //获取 session中的 publicKey
+    encrypt.setPublicKey('[[${session.publicKey}]]');
+    
+    //对密码加密，并且放入 input的value值中
+    document.getElementsByName("pwd")[0].value = encrypt.encrypt(password);
+    return true;
+}
+	
+</script>
+</html>

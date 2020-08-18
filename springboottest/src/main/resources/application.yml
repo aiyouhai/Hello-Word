@@ -1,0 +1,103 @@
+#server信息
+server:
+   #默认端口号为8080，可以通过server.port进行修改
+   port: 8083
+   #servlet访问路径默认上下文为/，可以通过server.context-path进行修改
+   servlet.context-path: /test
+   #session超时时间
+   session-timeout: 1800
+   #Tomcat的最大线程数
+   #tomcat:
+#        max-threads: 1000
+#        min-spare-threads: 30
+
+   #Tomcat url的编码格式 
+   uri-encoding: utf-8
+   
+   #ssl:
+    #key-store: classpath:test.keystore
+    #key-store-password: 123456
+   # keyStoreType: jks
+    #keyAlias: test2
+   
+
+#spring的信息  
+spring:
+  mvc :
+    static-path-pattern : /**
+  application:
+    name: myservice #服务名
+  freemarker:
+    suffix : .html
+   #选择开发环境的配置
+  profiles: 
+    active: dev  
+    #使用thymeleaf模板对页面进行渲染
+  thymeleaf:
+    mode: LEGACYHTML5
+ # 这个是配置模板路径的，默认是templates（此信息可也省略）
+    prefix: classpath:/templates/
+    suffix: .html
+  
+  # 这个开发配置为false，避免改了模板还要重启服务器
+    #cache: false
+    content-type: text/html
+    enabled: true
+# 设置上传文件的最大值
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+      enabled: true
+  # 启用热发布
+  devtools:
+    livereload:
+      enabled: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+     #Http编码配置    
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true 
+#mybatis信息
+mybatis:
+    configuration:
+    #驼峰命名
+       map-underscore-to-camel-case: true
+     #mapper.xml文件路径
+    mapper-locations: mybatis/**/*Mapper.xml
+    #别名包
+    typeAliasesPackage: com.tt.springboottest.ui.domain
+    # 加载全局的配置文件（mybatis的xml配置文件：单独对mybatis进行配置例如通用mapper，分页插件，驼峰命名，别名...）
+    #configLocation: classpath:mybatis/mybatis-config.xml
+# 打印sql
+logging:
+  level:
+  #debug、trace\dao层接口
+    com.tt.springboottest.ui.dao : trace
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+#自定义的信息  
+my:
+  name: lili
+  age: 199
+  #集合
+  favorites:
+    -足球
+    -篮球
+    -乒乓球
+    #集合里面是对对象
+  users: 
+    - name: 大李
+      age: 100
+    - name: 小刘
+      age: 200
+      
+  

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--2、股东及出资信息  -->
+	<#if enterpriseAnualReport?? && (enterpriseAnualReport?size>0)>
+				<#list enterpriseAnualReport?sort_by("ancheyear")?reverse as item>
+							<div class="content-box-body4">
+								<h2 class="title">2、股东及出资信息</h2>
+								<table class="pdf-table td-bottom-border mb20">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>股东</th>
+											<th>认缴出资额（万元）</th>
+											<th>认缴出资日期</th>
+											<th>实缴出资方式</th>
+											<th>实缴出资日期</th>
+											<th>累计实缴额（万元）</th>
+										</tr>
+									</thead>
+									<tbody>
+										<#if !item.annualShareHolderList?? ||(item.annualShareHolderList?size <1)>
+											<tr>
+												<td colspan="7">暂无数据</td>
+											</tr>
+											<#else> 
+											<#list item.annualShareHolderList as item> 
+													<tr>
+														<td>${item_index+1}</td>
+														<td>${item.invname!'-'}</td> 														 
+                                                     
+                                                        <td>${item.lisubconam!'-'}</td>
+                                                        
+														<td>${item.subcondate!'-'}</td>
+														<td>${item.acconform_cn!'-'}</td>
+														<td>${item.accondate!'-'}</td>
+														<td>${item.lisubconam!'-'}</td>
+													</tr>	
+													</#list>
+										 </#if> 
+									</tbody>
+								</table>
+							</div>
+							 </#list>
+							 </#if> 
+							 
+    <div class="content-box-body4">
+								<h2 class="title">1、企业财报</h2>
+								<table class="pdf-table td-right-border mb20" style="width: 100%">
+									<tbody>
+										<#if EnterpriseFinancialReport?? &&(EnterpriseFinancialReport?size>0)>
+											<tr>
+												<td class="td-class" style="border: 1px solid #999">
+											      ${EnterpriseFinancialReport[0].label!'-'}(万元)
+												</td>
+												
+
+												<td style="border: 1px solid #999">
+												<#if (EnterpriseFinancialReport[0].value)?? && (EnterpriseFinancialReport[0].value?length gt 0)>
+												#{((EnterpriseFinancialReport[0].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+
+												<td class="td-class" style="border: 1px solid #999">
+											      ${EnterpriseFinancialReport[1].label!'-'}(万元)
+												</td>
+												<td style="border: 1px solid #999">
+												<#if (EnterpriseFinancialReport[1].value)?? && (EnterpriseFinancialReport[1].value?length gt 0)>
+												#{((EnterpriseFinancialReport[1].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+											</tr>
+											<tr>
+												<td class="td-class" style="border: 1px solid #999">
+													 ${EnterpriseFinancialReport[2].label!'-'}(万元)
+												</td>
+												<td style="border: 1px solid #999">
+												<#if (EnterpriseFinancialReport[2].value)?? && (EnterpriseFinancialReport[2].value?length gt 0)>
+												#{((EnterpriseFinancialReport[2].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+
+												<td class="td-class" style="border: 1px solid #999">
+													${EnterpriseFinancialReport[3].label!'-'}(万元)
+												</td>
+												<td style="border: 1px solid #999">
+												<#if (EnterpriseFinancialReport[3].value)?? && (EnterpriseFinancialReport[3].value?length gt 0)>
+												#{((EnterpriseFinancialReport[3].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+											</tr>
+
+											<tr>
+												<td class="td-class" style="border: 1px solid #999">
+													${EnterpriseFinancialReport[4].label!'-'}(万元)
+												</td>
+												<td style="border: 1px solid #999">
+													<#if (EnterpriseFinancialReport[4].value)?? && (EnterpriseFinancialReport[4].value?length gt 0)>
+												#{((EnterpriseFinancialReport[4].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+
+												<td class="td-class" style="border: 1px solid #999">
+													${EnterpriseFinancialReport[5].label!'-'}(万元)
+												</td>
+												<td style="border: 1px solid #999">
+												<#if (EnterpriseFinancialReport[5].value)?? && (EnterpriseFinancialReport[5].value?length gt 0)>
+												#{((EnterpriseFinancialReport[5].value)?number/10000);m1M2}
+												<#else>
+												-
+												</#if>
+												</td>
+											</tr>
+											
+											<tr>
+												<td class="td-class" style="border: 1px solid #999">
+													${EnterpriseFinancialReport[10].label!'-'}
+												</td>
+												<td style="border: 1px solid #999">
+													${EnterpriseFinancialReport[10].value!'-'}
+												</td>
+
+												<td class="td-class" style="border: 1px solid #999">
+													${EnterpriseFinancialReport[11].label!'-'}
+												</td>
+												<td style="border: 1px solid #999">
+													${EnterpriseFinancialReport[11].value!'-'}
+												</td>
+											</tr>
+										</#if>
+									</tbody>
+								</table>
+							</div>							 
+							 
+							 
+							 
+							
+</body>
+</html>
+
+

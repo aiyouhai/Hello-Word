@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/T_paper/addT_paper" id="info" method="post" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>论文题目：</td>
+						<td><input type="text" id="ti" name="title"></td>
+						<td id="te" style="color: red"></td>
+					</tr>
+					<tr>
+						<td>类型：</td>
+						<td><input type="text" id="paperSummary" name="leiXing"></td>
+						<td id="te1" style="color: red"></td>
+					</tr>
+					<tr>
+						<td>论文摘要：</td>
+						<td><input type="text" id="paperSummary" name="zhaiYao"></td>
+						<td id="te1" style="color: red"></td>
+					</tr>
+					<tr>
+						<td>论文内容：</td>
+						<td><input type="file" id="paperPath" name="filename"/></td>
+						<td id="te2" style="color: red">上传大小不能超过5M*上传文件类型必须为：doc docx</td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="保存"> </td>
+						<td><input type="button" id="fh" value="返回"/></td>
+					</tr>
+				</table>
+			</form>
+</body>
+<script src="../jquery-1.12.4.min.js" th:src="@{/jquery-1.12.4.min.js}"></script>
+ 
+<!-- 引入非对称RSA加密工具 -->
+<script src="../jsencrypt.min.js" th:src="@{/jsencrypt.min.js}"></script>
+<script type="text/javascript">
+$("#info").submit(function() {
+	var title = $("#ti").val();
+	var paperSummary=$("#paperSummary").val();
+	var paperPath=$("#paperPath").val();//获取文件
+	var point = paperPath.lastIndexOf(".");  
+	var type = paperPath.substr(point);//获取后缀
+	var fileSzie=$("#paperPath")[0].files[0].size;//获取文件大小,得到的值为字节类型
+	var judge=true;
+	if(title==""){
+		$("#te").html("论文标题不能为空")
+		judge= false;
+	}
+	if(paperSummary==""){
+		$("#te1").html("摘要不能为空")
+		judge=false;
+	}
+	if(paperPath==""||type!=".doc"||type!=".doc"||fileSzie>1000){
+		$("#te2").html("上传文件格式不正确")
+		judge=false;
+	}else{
+		$("#te2").html("")
+	}
+	return judge;
+})
+</script>
+
+</html>
+
+
